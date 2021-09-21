@@ -1,3 +1,11 @@
-# My GitHub Project
+# mrsk_bot
 
-This is my GitHub project. I published it directly from Visual Studio Code.
+Telegram-бот для получения информации о плановых отключениях.
+По-умолчанию установлена локация "Республика Карелия"
+
+Требует наличия библиотеки pyTelegramBotAPI (https://github.com/eternnoir/pyTelegramBotAPI)
+pip3 uninstall telebot
+pip3 install PyTelegramBotAPI -U
+
+Для фонового запуска
+nohup python3 chat-bot.py &

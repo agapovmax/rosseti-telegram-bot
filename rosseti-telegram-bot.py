@@ -18,7 +18,6 @@ headers = {
     'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9'
     }
 
-
 def has_cyrillic(text):
     return bool(re.search('[а-яА-Я]', text))
 
@@ -38,23 +37,13 @@ def start_command(message):
     if has_cyrillic(message.text):
 
         params = {
-                #'manualRegion': region, 
                 'fullAddress': message.text,
                 'region': region,
                 'district':'',
                 'settlement':'',
                 'isSettlement': 'true',
-                #'manualSettlement':'',
-                #'street':'',
-                #'isManualStreet':'',
-                #'manualStreet':'',
-                #'house':'',
                 'from': fromdate,
                 'to': todate,
-                #'page': '1',
-                #'PageSize': '40',
-                #'fieldName': 'OutageDate',
-                #'orderDirection': '1'
             }
         r = requests.get(url, headers=headers, params = params)
         a = r.json()
@@ -62,7 +51,7 @@ def start_command(message):
         count = a.get('TotalCount')
         # Пишем в файл данные
         # Открываем лог файл для записи
-        f = open('chat-bot-log.txt', 'a')
+        f = open('rosseti-telegram-log.txt', 'a')
         print("Запрос по: " + message.text)
         print("Количество записей " + str(count) + '\n')
         f.write(str(fulltime) + '; ' + message.text + '; ' + str(count) + '\n')
@@ -82,7 +71,3 @@ def start_command(message):
         result = "Ошибка! Название следует писать русскими буквами!"
         bot.send_message(message.chat.id, result)
 bot.polling(none_stop = True)
-
-
-# TODO
-# Задать часовой пояс для записи логов + влияет на выдачу

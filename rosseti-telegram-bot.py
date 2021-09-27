@@ -1,7 +1,6 @@
 import requests
 import telebot
 import datetime
-from datetime import timezone, timedelta
 import re
 import config
 
@@ -31,10 +30,7 @@ def start_command(message):
     # Проверяем текст на наличие только русских букв. Иначе выводим сообщение об ошибке
     if has_cyrillic(message.text):
         # Вывод дат в нужном диапазоне в неделю 
-        timezone = +3.0 # для московского времени
-        tzinfo = timezone(timedelta(hours=timezone))
-        currtime = datetime.now(tzinfo)
-        #fulltime = datetime.datetime.now()
+        fulltime = datetime.datetime.now()
         currdate = datetime.datetime.today()
         todate = (datetime.datetime.today()).strftime("%d.%m.%Y")
         fromdate = (currdate - datetime.timedelta(days=int(days))).strftime("%d.%m.%Y")
@@ -56,7 +52,7 @@ def start_command(message):
         f = open('rosseti-telegram-log.txt', 'a')
         print("Запрос по: " + message.text)
         print("Количество записей " + str(count) + '\n')
-        f.write(str(currtime) + '; ' + message.text + '; ' + str(count) + '\n')
+        f.write(str(fulltime) + '; ' + message.text + '; ' + str(count) + '\n')
         f.close()
         # Если по данному запросу нет работ (их 0)
         if count == 0 :

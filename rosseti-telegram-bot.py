@@ -57,10 +57,10 @@ def start_command(message):
         # Если по данному запросу нет работ (их 0)
         if count == 0 :
             result = ('В ' + message.text + ' с ' + fromdate + ' по ' + todate + ' никаких работ не запланировано' + '\n')
-            result += ("Уточните информацию по телефону 8 (800) 220-0-220" + '\n')
-            result += ("Если отключение аварийное - создайте обращение на портале Светлая Страна https://xn--80aaafp0bqweeid1o.xn--p1ai/platform/portal/cons_main" + "\n")
-            result += ("или на официальном сайте Россети Северо-Запад https://lk.mrsksevzap.ru/Appeal/OutageAppeal")
-            bot.send_message(message.chat.id, result)
+            result += ('Уточните информацию по телефону <b>8 (800) 220-0-220</b>' + '\n')
+            result += ('Если отключение аварийное - создайте обращение на портале <a href="https://xn--80aaafp0bqweeid1o.xn--p1ai/platform/portal/cons_main/">Светлая Страна</a>')
+            result += (' или на официальном сайте <a href="https://lk.mrsksevzap.ru/Appeal/OutageAppeal/">Россети Северо-Запад</a>')
+            bot.send_message(message.chat.id, result, parse_mode='html')
         else:
             for item in a['items']:
                 result = ( item['Description'] + ' отключение по адресу ' + item['Address'] + ' c ' + item['From'] + ' по ' + item['To'] + ' ' + item['Condition'])
